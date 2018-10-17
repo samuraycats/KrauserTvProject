@@ -1,0 +1,1027 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="krausertvModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblcapitulos">
+          <Key>
+            <PropertyRef Name="idcapitulo" />
+          </Key>
+          <Property Name="idcapitulo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idserie" Type="int" Nullable="false" />
+          <Property Name="idtemporada" Type="int" Nullable="false" />
+          <Property Name="consecutivo" Type="int" />
+          <Property Name="titulo" Type="varchar" MaxLength="150" />
+          <Property Name="alta" Type="date" />
+          <Property Name="miniatura" Type="varchar" MaxLength="50" />
+          <Property Name="descripcion" Type="varchar" MaxLength="1500" />
+          <Property Name="status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblcapituloservers">
+          <Key>
+            <PropertyRef Name="idservidor" />
+            <PropertyRef Name="idcapitulo" />
+          </Key>
+          <Property Name="idservidor" Type="int" Nullable="false" />
+          <Property Name="idcapitulo" Type="int" Nullable="false" />
+          <Property Name="link" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="status" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblgeneros">
+          <Key>
+            <PropertyRef Name="idgenero" />
+          </Key>
+          <Property Name="idgenero" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="status" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblpersonas">
+          <Key>
+            <PropertyRef Name="idusuario" />
+          </Key>
+          <Property Name="idusuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblseriegenero">
+          <Key>
+            <PropertyRef Name="idserie" />
+            <PropertyRef Name="idgenero" />
+          </Key>
+          <Property Name="idserie" Type="int" Nullable="false" />
+          <Property Name="idgenero" Type="int" Nullable="false" />
+          <Property Name="status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblserielike">
+          <Key>
+            <PropertyRef Name="idserie" />
+            <PropertyRef Name="idusuario" />
+          </Key>
+          <Property Name="idserie" Type="int" Nullable="false" />
+          <Property Name="idusuario" Type="int" Nullable="false" />
+          <Property Name="status" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblserienolike">
+          <Key>
+            <PropertyRef Name="idserie" />
+            <PropertyRef Name="idusuario" />
+          </Key>
+          <Property Name="idserie" Type="int" Nullable="false" />
+          <Property Name="idusuario" Type="int" Nullable="false" />
+          <Property Name="status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblseries">
+          <Key>
+            <PropertyRef Name="idserie" />
+          </Key>
+          <Property Name="idserie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="año" Type="int" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="3000" Nullable="false" />
+          <Property Name="poster" Type="varchar" MaxLength="50" />
+          <Property Name="alta" Type="date" Nullable="false" />
+          <Property Name="trailer" Type="varchar" MaxLength="50" />
+          <Property Name="condicion" Type="bit" Nullable="false" />
+          <Property Name="status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblserieseguir">
+          <Key>
+            <PropertyRef Name="idserie" />
+            <PropertyRef Name="idusuario" />
+          </Key>
+          <Property Name="idserie" Type="int" Nullable="false" />
+          <Property Name="idusuario" Type="int" Nullable="false" />
+          <Property Name="status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblservidores">
+          <Key>
+            <PropertyRef Name="idservidor" />
+          </Key>
+          <Property Name="idservidor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbltemporadas">
+          <Key>
+            <PropertyRef Name="idtemporada" />
+          </Key>
+          <Property Name="idtemporada" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="status" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbltipocuentas">
+          <Key>
+            <PropertyRef Name="idtipocuenta" />
+          </Key>
+          <Property Name="idtipocuenta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblusuariofavoritoseries">
+          <Key>
+            <PropertyRef Name="idusuario" />
+            <PropertyRef Name="idserie" />
+          </Key>
+          <Property Name="idusuario" Type="int" Nullable="false" />
+          <Property Name="idserie" Type="int" Nullable="false" />
+          <Property Name="status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblusuarios">
+          <Key>
+            <PropertyRef Name="idusuario" />
+          </Key>
+          <Property Name="idusuario" Type="int" Nullable="false" />
+          <Property Name="idtipocuenta" Type="int" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="usuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="status" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__tblgeneros">
+          <End Role="tblgeneros" Type="Self.tblgeneros" Multiplicity="1" />
+          <End Role="tblseriegenero" Type="Self.tblseriegenero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblgeneros">
+              <PropertyRef Name="idgenero" />
+            </Principal>
+            <Dependent Role="tblseriegenero">
+              <PropertyRef Name="idgenero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblseries">
+          <End Role="tblseries" Type="Self.tblseries" Multiplicity="1" />
+          <End Role="tblseriegenero" Type="Self.tblseriegenero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblseries">
+              <PropertyRef Name="idserie" />
+            </Principal>
+            <Dependent Role="tblseriegenero">
+              <PropertyRef Name="idserie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblcapitulos_tblseries">
+          <End Role="tblseries" Type="Self.tblseries" Multiplicity="1" />
+          <End Role="tblcapitulos" Type="Self.tblcapitulos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblseries">
+              <PropertyRef Name="idserie" />
+            </Principal>
+            <Dependent Role="tblcapitulos">
+              <PropertyRef Name="idserie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblcapitulos_tbltemporadas">
+          <End Role="tbltemporadas" Type="Self.tbltemporadas" Multiplicity="1" />
+          <End Role="tblcapitulos" Type="Self.tblcapitulos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbltemporadas">
+              <PropertyRef Name="idtemporada" />
+            </Principal>
+            <Dependent Role="tblcapitulos">
+              <PropertyRef Name="idtemporada" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblcapituloservers_tblcapitulos">
+          <End Role="tblcapitulos" Type="Self.tblcapitulos" Multiplicity="1" />
+          <End Role="tblcapituloservers" Type="Self.tblcapituloservers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblcapitulos">
+              <PropertyRef Name="idcapitulo" />
+            </Principal>
+            <Dependent Role="tblcapituloservers">
+              <PropertyRef Name="idcapitulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblcapituloservers_tblservidores">
+          <End Role="tblservidores" Type="Self.tblservidores" Multiplicity="1" />
+          <End Role="tblcapituloservers" Type="Self.tblcapituloservers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblservidores">
+              <PropertyRef Name="idservidor" />
+            </Principal>
+            <Dependent Role="tblcapituloservers">
+              <PropertyRef Name="idservidor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblserielike_tblseries">
+          <End Role="tblseries" Type="Self.tblseries" Multiplicity="1" />
+          <End Role="tblserielike" Type="Self.tblserielike" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblseries">
+              <PropertyRef Name="idserie" />
+            </Principal>
+            <Dependent Role="tblserielike">
+              <PropertyRef Name="idserie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblserielike_tblusuarios">
+          <End Role="tblusuarios" Type="Self.tblusuarios" Multiplicity="1" />
+          <End Role="tblserielike" Type="Self.tblserielike" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblusuarios">
+              <PropertyRef Name="idusuario" />
+            </Principal>
+            <Dependent Role="tblserielike">
+              <PropertyRef Name="idusuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblserienolike_tblseries">
+          <End Role="tblseries" Type="Self.tblseries" Multiplicity="1" />
+          <End Role="tblserienolike" Type="Self.tblserienolike" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblseries">
+              <PropertyRef Name="idserie" />
+            </Principal>
+            <Dependent Role="tblserienolike">
+              <PropertyRef Name="idserie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblserienolike_tblusuarios">
+          <End Role="tblusuarios" Type="Self.tblusuarios" Multiplicity="1" />
+          <End Role="tblserienolike" Type="Self.tblserienolike" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblusuarios">
+              <PropertyRef Name="idusuario" />
+            </Principal>
+            <Dependent Role="tblserienolike">
+              <PropertyRef Name="idusuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblserieseguir_tblseries">
+          <End Role="tblseries" Type="Self.tblseries" Multiplicity="1" />
+          <End Role="tblserieseguir" Type="Self.tblserieseguir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblseries">
+              <PropertyRef Name="idserie" />
+            </Principal>
+            <Dependent Role="tblserieseguir">
+              <PropertyRef Name="idserie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblserieseguir_tblusuarios">
+          <End Role="tblusuarios" Type="Self.tblusuarios" Multiplicity="1" />
+          <End Role="tblserieseguir" Type="Self.tblserieseguir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblusuarios">
+              <PropertyRef Name="idusuario" />
+            </Principal>
+            <Dependent Role="tblserieseguir">
+              <PropertyRef Name="idusuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblusuariofavoritoseries_tblseries">
+          <End Role="tblseries" Type="Self.tblseries" Multiplicity="1" />
+          <End Role="tblusuariofavoritoseries" Type="Self.tblusuariofavoritoseries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblseries">
+              <PropertyRef Name="idserie" />
+            </Principal>
+            <Dependent Role="tblusuariofavoritoseries">
+              <PropertyRef Name="idserie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblusuariofavoritoseries_tblusuarios">
+          <End Role="tblusuarios" Type="Self.tblusuarios" Multiplicity="1" />
+          <End Role="tblusuariofavoritoseries" Type="Self.tblusuariofavoritoseries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblusuarios">
+              <PropertyRef Name="idusuario" />
+            </Principal>
+            <Dependent Role="tblusuariofavoritoseries">
+              <PropertyRef Name="idusuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblusuarios_tblpersonas">
+          <End Role="tblpersonas" Type="Self.tblpersonas" Multiplicity="1" />
+          <End Role="tblusuarios" Type="Self.tblusuarios" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tblpersonas">
+              <PropertyRef Name="idusuario" />
+            </Principal>
+            <Dependent Role="tblusuarios">
+              <PropertyRef Name="idusuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblusuarios_tbltipocuentas">
+          <End Role="tbltipocuentas" Type="Self.tbltipocuentas" Multiplicity="1" />
+          <End Role="tblusuarios" Type="Self.tblusuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbltipocuentas">
+              <PropertyRef Name="idtipocuenta" />
+            </Principal>
+            <Dependent Role="tblusuarios">
+              <PropertyRef Name="idtipocuenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="krausertvModelStoreContainer">
+          <EntitySet Name="tblcapitulos" EntityType="Self.tblcapitulos" Schema="krausertv" store:Type="Tables" />
+          <EntitySet Name="tblcapituloservers" EntityType="Self.tblcapituloservers" Schema="krausertv" store:Type="Tables" />
+          <EntitySet Name="tblgeneros" EntityType="Self.tblgeneros" Schema="krausertv" store:Type="Tables" />
+          <EntitySet Name="tblpersonas" EntityType="Self.tblpersonas" Schema="krausertv" store:Type="Tables" />
+          <EntitySet Name="tblseriegenero" EntityType="Self.tblseriegenero" Schema="krausertv" store:Type="Tables" />
+          <EntitySet Name="tblserielike" EntityType="Self.tblserielike" Schema="krausertv" store:Type="Tables" />
+          <EntitySet Name="tblserienolike" EntityType="Self.tblserienolike" Schema="krausertv" store:Type="Tables" />
+          <EntitySet Name="tblseries" EntityType="Self.tblseries" Schema="krausertv" store:Type="Tables" />
+          <EntitySet Name="tblserieseguir" EntityType="Self.tblserieseguir" Schema="krausertv" store:Type="Tables" />
+          <EntitySet Name="tblservidores" EntityType="Self.tblservidores" Schema="krausertv" store:Type="Tables" />
+          <EntitySet Name="tbltemporadas" EntityType="Self.tbltemporadas" Schema="krausertv" store:Type="Tables" />
+          <EntitySet Name="tbltipocuentas" EntityType="Self.tbltipocuentas" Schema="krausertv" store:Type="Tables" />
+          <EntitySet Name="tblusuariofavoritoseries" EntityType="Self.tblusuariofavoritoseries" Schema="krausertv" store:Type="Tables" />
+          <EntitySet Name="tblusuarios" EntityType="Self.tblusuarios" Schema="krausertv" store:Type="Tables" />
+          <AssociationSet Name="FK__tblgeneros" Association="Self.FK__tblgeneros">
+            <End Role="tblgeneros" EntitySet="tblgeneros" />
+            <End Role="tblseriegenero" EntitySet="tblseriegenero" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblseries" Association="Self.FK__tblseries">
+            <End Role="tblseries" EntitySet="tblseries" />
+            <End Role="tblseriegenero" EntitySet="tblseriegenero" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblcapitulos_tblseries" Association="Self.FK_tblcapitulos_tblseries">
+            <End Role="tblseries" EntitySet="tblseries" />
+            <End Role="tblcapitulos" EntitySet="tblcapitulos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblcapitulos_tbltemporadas" Association="Self.FK_tblcapitulos_tbltemporadas">
+            <End Role="tbltemporadas" EntitySet="tbltemporadas" />
+            <End Role="tblcapitulos" EntitySet="tblcapitulos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblcapituloservers_tblcapitulos" Association="Self.FK_tblcapituloservers_tblcapitulos">
+            <End Role="tblcapitulos" EntitySet="tblcapitulos" />
+            <End Role="tblcapituloservers" EntitySet="tblcapituloservers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblcapituloservers_tblservidores" Association="Self.FK_tblcapituloservers_tblservidores">
+            <End Role="tblservidores" EntitySet="tblservidores" />
+            <End Role="tblcapituloservers" EntitySet="tblcapituloservers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblserielike_tblseries" Association="Self.FK_tblserielike_tblseries">
+            <End Role="tblseries" EntitySet="tblseries" />
+            <End Role="tblserielike" EntitySet="tblserielike" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblserielike_tblusuarios" Association="Self.FK_tblserielike_tblusuarios">
+            <End Role="tblusuarios" EntitySet="tblusuarios" />
+            <End Role="tblserielike" EntitySet="tblserielike" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblserienolike_tblseries" Association="Self.FK_tblserienolike_tblseries">
+            <End Role="tblseries" EntitySet="tblseries" />
+            <End Role="tblserienolike" EntitySet="tblserienolike" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblserienolike_tblusuarios" Association="Self.FK_tblserienolike_tblusuarios">
+            <End Role="tblusuarios" EntitySet="tblusuarios" />
+            <End Role="tblserienolike" EntitySet="tblserienolike" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblserieseguir_tblseries" Association="Self.FK_tblserieseguir_tblseries">
+            <End Role="tblseries" EntitySet="tblseries" />
+            <End Role="tblserieseguir" EntitySet="tblserieseguir" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblserieseguir_tblusuarios" Association="Self.FK_tblserieseguir_tblusuarios">
+            <End Role="tblusuarios" EntitySet="tblusuarios" />
+            <End Role="tblserieseguir" EntitySet="tblserieseguir" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblusuariofavoritoseries_tblseries" Association="Self.FK_tblusuariofavoritoseries_tblseries">
+            <End Role="tblseries" EntitySet="tblseries" />
+            <End Role="tblusuariofavoritoseries" EntitySet="tblusuariofavoritoseries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblusuariofavoritoseries_tblusuarios" Association="Self.FK_tblusuariofavoritoseries_tblusuarios">
+            <End Role="tblusuarios" EntitySet="tblusuarios" />
+            <End Role="tblusuariofavoritoseries" EntitySet="tblusuariofavoritoseries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblusuarios_tblpersonas" Association="Self.FK_tblusuarios_tblpersonas">
+            <End Role="tblpersonas" EntitySet="tblpersonas" />
+            <End Role="tblusuarios" EntitySet="tblusuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblusuarios_tbltipocuentas" Association="Self.FK_tblusuarios_tbltipocuentas">
+            <End Role="tbltipocuentas" EntitySet="tbltipocuentas" />
+            <End Role="tblusuarios" EntitySet="tblusuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="krausertvModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="krausertvEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblcapitulos" EntityType="krausertvModel.tblcapitulos" />
+          <EntitySet Name="tblcapituloservers" EntityType="krausertvModel.tblcapituloservers" />
+          <EntitySet Name="tblgeneros" EntityType="krausertvModel.tblgeneros" />
+          <EntitySet Name="tblpersonas" EntityType="krausertvModel.tblpersonas" />
+          <EntitySet Name="tblseriegenero" EntityType="krausertvModel.tblseriegenero" />
+          <EntitySet Name="tblserielike" EntityType="krausertvModel.tblserielike" />
+          <EntitySet Name="tblserienolike" EntityType="krausertvModel.tblserienolike" />
+          <EntitySet Name="tblseries" EntityType="krausertvModel.tblseries" />
+          <EntitySet Name="tblserieseguir" EntityType="krausertvModel.tblserieseguir" />
+          <EntitySet Name="tblservidores" EntityType="krausertvModel.tblservidores" />
+          <EntitySet Name="tbltemporadas" EntityType="krausertvModel.tbltemporadas" />
+          <EntitySet Name="tbltipocuentas" EntityType="krausertvModel.tbltipocuentas" />
+          <EntitySet Name="tblusuariofavoritoseries" EntityType="krausertvModel.tblusuariofavoritoseries" />
+          <EntitySet Name="tblusuarios" EntityType="krausertvModel.tblusuarios" />
+          <AssociationSet Name="FK_tblcapitulos_tblseries" Association="krausertvModel.FK_tblcapitulos_tblseries">
+            <End Role="tblseries" EntitySet="tblseries" />
+            <End Role="tblcapitulos" EntitySet="tblcapitulos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblcapitulos_tbltemporadas" Association="krausertvModel.FK_tblcapitulos_tbltemporadas">
+            <End Role="tbltemporadas" EntitySet="tbltemporadas" />
+            <End Role="tblcapitulos" EntitySet="tblcapitulos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblcapituloservers_tblcapitulos" Association="krausertvModel.FK_tblcapituloservers_tblcapitulos">
+            <End Role="tblcapitulos" EntitySet="tblcapitulos" />
+            <End Role="tblcapituloservers" EntitySet="tblcapituloservers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblcapituloservers_tblservidores" Association="krausertvModel.FK_tblcapituloservers_tblservidores">
+            <End Role="tblservidores" EntitySet="tblservidores" />
+            <End Role="tblcapituloservers" EntitySet="tblcapituloservers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblgeneros" Association="krausertvModel.FK__tblgeneros">
+            <End Role="tblgeneros" EntitySet="tblgeneros" />
+            <End Role="tblseriegenero" EntitySet="tblseriegenero" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblusuarios_tblpersonas" Association="krausertvModel.FK_tblusuarios_tblpersonas">
+            <End Role="tblpersonas" EntitySet="tblpersonas" />
+            <End Role="tblusuarios" EntitySet="tblusuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblseries" Association="krausertvModel.FK__tblseries">
+            <End Role="tblseries" EntitySet="tblseries" />
+            <End Role="tblseriegenero" EntitySet="tblseriegenero" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblserielike_tblseries" Association="krausertvModel.FK_tblserielike_tblseries">
+            <End Role="tblseries" EntitySet="tblseries" />
+            <End Role="tblserielike" EntitySet="tblserielike" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblserielike_tblusuarios" Association="krausertvModel.FK_tblserielike_tblusuarios">
+            <End Role="tblusuarios" EntitySet="tblusuarios" />
+            <End Role="tblserielike" EntitySet="tblserielike" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblserienolike_tblseries" Association="krausertvModel.FK_tblserienolike_tblseries">
+            <End Role="tblseries" EntitySet="tblseries" />
+            <End Role="tblserienolike" EntitySet="tblserienolike" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblserienolike_tblusuarios" Association="krausertvModel.FK_tblserienolike_tblusuarios">
+            <End Role="tblusuarios" EntitySet="tblusuarios" />
+            <End Role="tblserienolike" EntitySet="tblserienolike" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblserieseguir_tblseries" Association="krausertvModel.FK_tblserieseguir_tblseries">
+            <End Role="tblseries" EntitySet="tblseries" />
+            <End Role="tblserieseguir" EntitySet="tblserieseguir" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblusuariofavoritoseries_tblseries" Association="krausertvModel.FK_tblusuariofavoritoseries_tblseries">
+            <End Role="tblseries" EntitySet="tblseries" />
+            <End Role="tblusuariofavoritoseries" EntitySet="tblusuariofavoritoseries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblserieseguir_tblusuarios" Association="krausertvModel.FK_tblserieseguir_tblusuarios">
+            <End Role="tblusuarios" EntitySet="tblusuarios" />
+            <End Role="tblserieseguir" EntitySet="tblserieseguir" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblusuarios_tbltipocuentas" Association="krausertvModel.FK_tblusuarios_tbltipocuentas">
+            <End Role="tbltipocuentas" EntitySet="tbltipocuentas" />
+            <End Role="tblusuarios" EntitySet="tblusuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblusuariofavoritoseries_tblusuarios" Association="krausertvModel.FK_tblusuariofavoritoseries_tblusuarios">
+            <End Role="tblusuarios" EntitySet="tblusuarios" />
+            <End Role="tblusuariofavoritoseries" EntitySet="tblusuariofavoritoseries" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tblcapitulos">
+          <Key>
+            <PropertyRef Name="idcapitulo" />
+          </Key>
+          <Property Name="idcapitulo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idserie" Type="Int32" Nullable="false" />
+          <Property Name="idtemporada" Type="Int32" Nullable="false" />
+          <Property Name="consecutivo" Type="Int32" />
+          <Property Name="titulo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="alta" Type="DateTime" />
+          <Property Name="miniatura" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="1500" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblseries" Relationship="krausertvModel.FK_tblcapitulos_tblseries" FromRole="tblcapitulos" ToRole="tblseries" />
+          <NavigationProperty Name="tbltemporadas" Relationship="krausertvModel.FK_tblcapitulos_tbltemporadas" FromRole="tblcapitulos" ToRole="tbltemporadas" />
+          <NavigationProperty Name="tblcapituloservers" Relationship="krausertvModel.FK_tblcapituloservers_tblcapitulos" FromRole="tblcapitulos" ToRole="tblcapituloservers" />
+        </EntityType>
+        <EntityType Name="tblcapituloservers">
+          <Key>
+            <PropertyRef Name="idservidor" />
+            <PropertyRef Name="idcapitulo" />
+          </Key>
+          <Property Name="idservidor" Type="Int32" Nullable="false" />
+          <Property Name="idcapitulo" Type="Int32" Nullable="false" />
+          <Property Name="link" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="Boolean" />
+          <NavigationProperty Name="tblcapitulos" Relationship="krausertvModel.FK_tblcapituloservers_tblcapitulos" FromRole="tblcapituloservers" ToRole="tblcapitulos" />
+          <NavigationProperty Name="tblservidores" Relationship="krausertvModel.FK_tblcapituloservers_tblservidores" FromRole="tblcapituloservers" ToRole="tblservidores" />
+        </EntityType>
+        <EntityType Name="tblgeneros">
+          <Key>
+            <PropertyRef Name="idgenero" />
+          </Key>
+          <Property Name="idgenero" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="Boolean" />
+          <NavigationProperty Name="tblseriegenero" Relationship="krausertvModel.FK__tblgeneros" FromRole="tblgeneros" ToRole="tblseriegenero" />
+        </EntityType>
+        <EntityType Name="tblpersonas">
+          <Key>
+            <PropertyRef Name="idusuario" />
+          </Key>
+          <Property Name="idusuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblusuarios" Relationship="krausertvModel.FK_tblusuarios_tblpersonas" FromRole="tblpersonas" ToRole="tblusuarios" />
+        </EntityType>
+        <EntityType Name="tblseriegenero">
+          <Key>
+            <PropertyRef Name="idserie" />
+            <PropertyRef Name="idgenero" />
+          </Key>
+          <Property Name="idserie" Type="Int32" Nullable="false" />
+          <Property Name="idgenero" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblgeneros" Relationship="krausertvModel.FK__tblgeneros" FromRole="tblseriegenero" ToRole="tblgeneros" />
+          <NavigationProperty Name="tblseries" Relationship="krausertvModel.FK__tblseries" FromRole="tblseriegenero" ToRole="tblseries" />
+        </EntityType>
+        <EntityType Name="tblserielike">
+          <Key>
+            <PropertyRef Name="idserie" />
+            <PropertyRef Name="idusuario" />
+          </Key>
+          <Property Name="idserie" Type="Int32" Nullable="false" />
+          <Property Name="idusuario" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="Boolean" />
+          <NavigationProperty Name="tblseries" Relationship="krausertvModel.FK_tblserielike_tblseries" FromRole="tblserielike" ToRole="tblseries" />
+          <NavigationProperty Name="tblusuarios" Relationship="krausertvModel.FK_tblserielike_tblusuarios" FromRole="tblserielike" ToRole="tblusuarios" />
+        </EntityType>
+        <EntityType Name="tblserienolike">
+          <Key>
+            <PropertyRef Name="idserie" />
+            <PropertyRef Name="idusuario" />
+          </Key>
+          <Property Name="idserie" Type="Int32" Nullable="false" />
+          <Property Name="idusuario" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblseries" Relationship="krausertvModel.FK_tblserienolike_tblseries" FromRole="tblserienolike" ToRole="tblseries" />
+          <NavigationProperty Name="tblusuarios" Relationship="krausertvModel.FK_tblserienolike_tblusuarios" FromRole="tblserienolike" ToRole="tblusuarios" />
+        </EntityType>
+        <EntityType Name="tblseries">
+          <Key>
+            <PropertyRef Name="idserie" />
+          </Key>
+          <Property Name="idserie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="año" Type="Int32" Nullable="false" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="3000" FixedLength="false" Unicode="false" />
+          <Property Name="poster" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="alta" Type="DateTime" Nullable="false" />
+          <Property Name="trailer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="condicion" Type="Boolean" Nullable="false" />
+          <Property Name="status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblcapitulos" Relationship="krausertvModel.FK_tblcapitulos_tblseries" FromRole="tblseries" ToRole="tblcapitulos" />
+          <NavigationProperty Name="tblseriegenero" Relationship="krausertvModel.FK__tblseries" FromRole="tblseries" ToRole="tblseriegenero" />
+          <NavigationProperty Name="tblserielike" Relationship="krausertvModel.FK_tblserielike_tblseries" FromRole="tblseries" ToRole="tblserielike" />
+          <NavigationProperty Name="tblserienolike" Relationship="krausertvModel.FK_tblserienolike_tblseries" FromRole="tblseries" ToRole="tblserienolike" />
+          <NavigationProperty Name="tblserieseguir" Relationship="krausertvModel.FK_tblserieseguir_tblseries" FromRole="tblseries" ToRole="tblserieseguir" />
+          <NavigationProperty Name="tblusuariofavoritoseries" Relationship="krausertvModel.FK_tblusuariofavoritoseries_tblseries" FromRole="tblseries" ToRole="tblusuariofavoritoseries" />
+        </EntityType>
+        <EntityType Name="tblserieseguir">
+          <Key>
+            <PropertyRef Name="idserie" />
+            <PropertyRef Name="idusuario" />
+          </Key>
+          <Property Name="idserie" Type="Int32" Nullable="false" />
+          <Property Name="idusuario" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblseries" Relationship="krausertvModel.FK_tblserieseguir_tblseries" FromRole="tblserieseguir" ToRole="tblseries" />
+          <NavigationProperty Name="tblusuarios" Relationship="krausertvModel.FK_tblserieseguir_tblusuarios" FromRole="tblserieseguir" ToRole="tblusuarios" />
+        </EntityType>
+        <EntityType Name="tblservidores">
+          <Key>
+            <PropertyRef Name="idservidor" />
+          </Key>
+          <Property Name="idservidor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblcapituloservers" Relationship="krausertvModel.FK_tblcapituloservers_tblservidores" FromRole="tblservidores" ToRole="tblcapituloservers" />
+        </EntityType>
+        <EntityType Name="tbltemporadas">
+          <Key>
+            <PropertyRef Name="idtemporada" />
+          </Key>
+          <Property Name="idtemporada" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="Boolean" />
+          <NavigationProperty Name="tblcapitulos" Relationship="krausertvModel.FK_tblcapitulos_tbltemporadas" FromRole="tbltemporadas" ToRole="tblcapitulos" />
+        </EntityType>
+        <EntityType Name="tbltipocuentas">
+          <Key>
+            <PropertyRef Name="idtipocuenta" />
+          </Key>
+          <Property Name="idtipocuenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblusuarios" Relationship="krausertvModel.FK_tblusuarios_tbltipocuentas" FromRole="tbltipocuentas" ToRole="tblusuarios" />
+        </EntityType>
+        <EntityType Name="tblusuariofavoritoseries">
+          <Key>
+            <PropertyRef Name="idusuario" />
+            <PropertyRef Name="idserie" />
+          </Key>
+          <Property Name="idusuario" Type="Int32" Nullable="false" />
+          <Property Name="idserie" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblseries" Relationship="krausertvModel.FK_tblusuariofavoritoseries_tblseries" FromRole="tblusuariofavoritoseries" ToRole="tblseries" />
+          <NavigationProperty Name="tblusuarios" Relationship="krausertvModel.FK_tblusuariofavoritoseries_tblusuarios" FromRole="tblusuariofavoritoseries" ToRole="tblusuarios" />
+        </EntityType>
+        <EntityType Name="tblusuarios">
+          <Key>
+            <PropertyRef Name="idusuario" />
+          </Key>
+          <Property Name="idusuario" Type="Int32" Nullable="false" />
+          <Property Name="idtipocuenta" Type="Int32" Nullable="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="usuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblpersonas" Relationship="krausertvModel.FK_tblusuarios_tblpersonas" FromRole="tblusuarios" ToRole="tblpersonas" />
+          <NavigationProperty Name="tblserielike" Relationship="krausertvModel.FK_tblserielike_tblusuarios" FromRole="tblusuarios" ToRole="tblserielike" />
+          <NavigationProperty Name="tblserienolike" Relationship="krausertvModel.FK_tblserienolike_tblusuarios" FromRole="tblusuarios" ToRole="tblserienolike" />
+          <NavigationProperty Name="tblserieseguir" Relationship="krausertvModel.FK_tblserieseguir_tblusuarios" FromRole="tblusuarios" ToRole="tblserieseguir" />
+          <NavigationProperty Name="tbltipocuentas" Relationship="krausertvModel.FK_tblusuarios_tbltipocuentas" FromRole="tblusuarios" ToRole="tbltipocuentas" />
+          <NavigationProperty Name="tblusuariofavoritoseries" Relationship="krausertvModel.FK_tblusuariofavoritoseries_tblusuarios" FromRole="tblusuarios" ToRole="tblusuariofavoritoseries" />
+        </EntityType>
+        <Association Name="FK_tblcapitulos_tblseries">
+          <End Type="krausertvModel.tblseries" Role="tblseries" Multiplicity="1" />
+          <End Type="krausertvModel.tblcapitulos" Role="tblcapitulos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblseries">
+              <PropertyRef Name="idserie" />
+            </Principal>
+            <Dependent Role="tblcapitulos">
+              <PropertyRef Name="idserie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblcapitulos_tbltemporadas">
+          <End Type="krausertvModel.tbltemporadas" Role="tbltemporadas" Multiplicity="1" />
+          <End Type="krausertvModel.tblcapitulos" Role="tblcapitulos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbltemporadas">
+              <PropertyRef Name="idtemporada" />
+            </Principal>
+            <Dependent Role="tblcapitulos">
+              <PropertyRef Name="idtemporada" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblcapituloservers_tblcapitulos">
+          <End Type="krausertvModel.tblcapitulos" Role="tblcapitulos" Multiplicity="1" />
+          <End Type="krausertvModel.tblcapituloservers" Role="tblcapituloservers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblcapitulos">
+              <PropertyRef Name="idcapitulo" />
+            </Principal>
+            <Dependent Role="tblcapituloservers">
+              <PropertyRef Name="idcapitulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblcapituloservers_tblservidores">
+          <End Type="krausertvModel.tblservidores" Role="tblservidores" Multiplicity="1" />
+          <End Type="krausertvModel.tblcapituloservers" Role="tblcapituloservers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblservidores">
+              <PropertyRef Name="idservidor" />
+            </Principal>
+            <Dependent Role="tblcapituloservers">
+              <PropertyRef Name="idservidor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblgeneros">
+          <End Type="krausertvModel.tblgeneros" Role="tblgeneros" Multiplicity="1" />
+          <End Type="krausertvModel.tblseriegenero" Role="tblseriegenero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblgeneros">
+              <PropertyRef Name="idgenero" />
+            </Principal>
+            <Dependent Role="tblseriegenero">
+              <PropertyRef Name="idgenero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblusuarios_tblpersonas">
+          <End Type="krausertvModel.tblpersonas" Role="tblpersonas" Multiplicity="1" />
+          <End Type="krausertvModel.tblusuarios" Role="tblusuarios" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tblpersonas">
+              <PropertyRef Name="idusuario" />
+            </Principal>
+            <Dependent Role="tblusuarios">
+              <PropertyRef Name="idusuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblseries">
+          <End Type="krausertvModel.tblseries" Role="tblseries" Multiplicity="1" />
+          <End Type="krausertvModel.tblseriegenero" Role="tblseriegenero" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblseries">
+              <PropertyRef Name="idserie" />
+            </Principal>
+            <Dependent Role="tblseriegenero">
+              <PropertyRef Name="idserie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblserielike_tblseries">
+          <End Type="krausertvModel.tblseries" Role="tblseries" Multiplicity="1" />
+          <End Type="krausertvModel.tblserielike" Role="tblserielike" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblseries">
+              <PropertyRef Name="idserie" />
+            </Principal>
+            <Dependent Role="tblserielike">
+              <PropertyRef Name="idserie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblserielike_tblusuarios">
+          <End Type="krausertvModel.tblusuarios" Role="tblusuarios" Multiplicity="1" />
+          <End Type="krausertvModel.tblserielike" Role="tblserielike" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblusuarios">
+              <PropertyRef Name="idusuario" />
+            </Principal>
+            <Dependent Role="tblserielike">
+              <PropertyRef Name="idusuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblserienolike_tblseries">
+          <End Type="krausertvModel.tblseries" Role="tblseries" Multiplicity="1" />
+          <End Type="krausertvModel.tblserienolike" Role="tblserienolike" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblseries">
+              <PropertyRef Name="idserie" />
+            </Principal>
+            <Dependent Role="tblserienolike">
+              <PropertyRef Name="idserie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblserienolike_tblusuarios">
+          <End Type="krausertvModel.tblusuarios" Role="tblusuarios" Multiplicity="1" />
+          <End Type="krausertvModel.tblserienolike" Role="tblserienolike" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblusuarios">
+              <PropertyRef Name="idusuario" />
+            </Principal>
+            <Dependent Role="tblserienolike">
+              <PropertyRef Name="idusuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblserieseguir_tblseries">
+          <End Type="krausertvModel.tblseries" Role="tblseries" Multiplicity="1" />
+          <End Type="krausertvModel.tblserieseguir" Role="tblserieseguir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblseries">
+              <PropertyRef Name="idserie" />
+            </Principal>
+            <Dependent Role="tblserieseguir">
+              <PropertyRef Name="idserie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblusuariofavoritoseries_tblseries">
+          <End Type="krausertvModel.tblseries" Role="tblseries" Multiplicity="1" />
+          <End Type="krausertvModel.tblusuariofavoritoseries" Role="tblusuariofavoritoseries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblseries">
+              <PropertyRef Name="idserie" />
+            </Principal>
+            <Dependent Role="tblusuariofavoritoseries">
+              <PropertyRef Name="idserie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblserieseguir_tblusuarios">
+          <End Type="krausertvModel.tblusuarios" Role="tblusuarios" Multiplicity="1" />
+          <End Type="krausertvModel.tblserieseguir" Role="tblserieseguir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblusuarios">
+              <PropertyRef Name="idusuario" />
+            </Principal>
+            <Dependent Role="tblserieseguir">
+              <PropertyRef Name="idusuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblusuarios_tbltipocuentas">
+          <End Type="krausertvModel.tbltipocuentas" Role="tbltipocuentas" Multiplicity="1" />
+          <End Type="krausertvModel.tblusuarios" Role="tblusuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbltipocuentas">
+              <PropertyRef Name="idtipocuenta" />
+            </Principal>
+            <Dependent Role="tblusuarios">
+              <PropertyRef Name="idtipocuenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblusuariofavoritoseries_tblusuarios">
+          <End Type="krausertvModel.tblusuarios" Role="tblusuarios" Multiplicity="1" />
+          <End Type="krausertvModel.tblusuariofavoritoseries" Role="tblusuariofavoritoseries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblusuarios">
+              <PropertyRef Name="idusuario" />
+            </Principal>
+            <Dependent Role="tblusuariofavoritoseries">
+              <PropertyRef Name="idusuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="krausertvModelStoreContainer" CdmEntityContainer="krausertvEntities">
+          <EntitySetMapping Name="tblcapitulos">
+            <EntityTypeMapping TypeName="krausertvModel.tblcapitulos">
+              <MappingFragment StoreEntitySet="tblcapitulos">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="miniatura" ColumnName="miniatura" />
+                <ScalarProperty Name="alta" ColumnName="alta" />
+                <ScalarProperty Name="titulo" ColumnName="titulo" />
+                <ScalarProperty Name="consecutivo" ColumnName="consecutivo" />
+                <ScalarProperty Name="idtemporada" ColumnName="idtemporada" />
+                <ScalarProperty Name="idserie" ColumnName="idserie" />
+                <ScalarProperty Name="idcapitulo" ColumnName="idcapitulo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblcapituloservers">
+            <EntityTypeMapping TypeName="krausertvModel.tblcapituloservers">
+              <MappingFragment StoreEntitySet="tblcapituloservers">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="link" ColumnName="link" />
+                <ScalarProperty Name="idcapitulo" ColumnName="idcapitulo" />
+                <ScalarProperty Name="idservidor" ColumnName="idservidor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblgeneros">
+            <EntityTypeMapping TypeName="krausertvModel.tblgeneros">
+              <MappingFragment StoreEntitySet="tblgeneros">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="idgenero" ColumnName="idgenero" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblpersonas">
+            <EntityTypeMapping TypeName="krausertvModel.tblpersonas">
+              <MappingFragment StoreEntitySet="tblpersonas">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="idusuario" ColumnName="idusuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblseriegenero">
+            <EntityTypeMapping TypeName="krausertvModel.tblseriegenero">
+              <MappingFragment StoreEntitySet="tblseriegenero">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="idgenero" ColumnName="idgenero" />
+                <ScalarProperty Name="idserie" ColumnName="idserie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblserielike">
+            <EntityTypeMapping TypeName="krausertvModel.tblserielike">
+              <MappingFragment StoreEntitySet="tblserielike">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="idusuario" ColumnName="idusuario" />
+                <ScalarProperty Name="idserie" ColumnName="idserie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblserienolike">
+            <EntityTypeMapping TypeName="krausertvModel.tblserienolike">
+              <MappingFragment StoreEntitySet="tblserienolike">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="idusuario" ColumnName="idusuario" />
+                <ScalarProperty Name="idserie" ColumnName="idserie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblseries">
+            <EntityTypeMapping TypeName="krausertvModel.tblseries">
+              <MappingFragment StoreEntitySet="tblseries">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="condicion" ColumnName="condicion" />
+                <ScalarProperty Name="trailer" ColumnName="trailer" />
+                <ScalarProperty Name="alta" ColumnName="alta" />
+                <ScalarProperty Name="poster" ColumnName="poster" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="año" ColumnName="año" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="idserie" ColumnName="idserie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblserieseguir">
+            <EntityTypeMapping TypeName="krausertvModel.tblserieseguir">
+              <MappingFragment StoreEntitySet="tblserieseguir">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="idusuario" ColumnName="idusuario" />
+                <ScalarProperty Name="idserie" ColumnName="idserie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblservidores">
+            <EntityTypeMapping TypeName="krausertvModel.tblservidores">
+              <MappingFragment StoreEntitySet="tblservidores">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="idservidor" ColumnName="idservidor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbltemporadas">
+            <EntityTypeMapping TypeName="krausertvModel.tbltemporadas">
+              <MappingFragment StoreEntitySet="tbltemporadas">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="idtemporada" ColumnName="idtemporada" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbltipocuentas">
+            <EntityTypeMapping TypeName="krausertvModel.tbltipocuentas">
+              <MappingFragment StoreEntitySet="tbltipocuentas">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="idtipocuenta" ColumnName="idtipocuenta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblusuariofavoritoseries">
+            <EntityTypeMapping TypeName="krausertvModel.tblusuariofavoritoseries">
+              <MappingFragment StoreEntitySet="tblusuariofavoritoseries">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="idserie" ColumnName="idserie" />
+                <ScalarProperty Name="idusuario" ColumnName="idusuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblusuarios">
+            <EntityTypeMapping TypeName="krausertvModel.tblusuarios">
+              <MappingFragment StoreEntitySet="tblusuarios">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="idtipocuenta" ColumnName="idtipocuenta" />
+                <ScalarProperty Name="idusuario" ColumnName="idusuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
